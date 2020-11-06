@@ -13,7 +13,13 @@ var routes = Router();
 routes.get("/find-user", UserController.index);
 
 //Inseri 01(um) novo usuário
-routes.post("/create-user", UserController.store);
+routes.post("/create-user", AuthMiddleware, UserController.store);
+
+//busca todos os usuário
+routes.get("/users", AuthMiddleware, UserController.show);
+
+//Deleta 01(um) user pelo id
+routes.delete("/delete-user", AuthMiddleware, UserController.delete);
 
 //Inseri 01(uma) nova categoria
 routes.post("/create-category", CategoryController.store);
@@ -22,10 +28,10 @@ routes.post("/create-category", CategoryController.store);
 routes.get("/find-category", CategoryController.index);
 
 //Busca todas as categoria
-routes.get("/category", AuthMiddleware,  CategoryController.show);
+routes.get("/category", CategoryController.show);
 
 //Inseri 01(um) novo post
-routes.post("/create-post", PostController.store);
+routes.post("/create-post", AuthMiddleware, PostController.store);
 
 //Inseri 01(um) novo post
 routes.get("/find-post", PostController.index);
@@ -34,24 +40,9 @@ routes.get("/find-post", PostController.index);
 routes.get("/posts", PostController.show);
 
 //Deleta 01(um) post pelo id
-routes.delete("/delete-post", PostController.delete);
+routes.delete("/delete-post", AuthMiddleware, PostController.delete);
 
 //Autenticação por jwt
 routes.post("/authentication", AuthController.store);
-
-// //Autenticação por jwt
-// routes.post("/authentication", AuthController.store);
-
-//Lista todos os usuário
-// routes.get("/list-users", UserController.show);
-
-//Atualiza os dados do usuário
-// routes.put("/update-user", UserController.update);
-
-//Deleta um usuário
-// routes.delete("/delete-user/:id?", UserController.delete);
-
-//Envia email's
-// routes.post("/send-mail", UserController.sendEmail);
 
 export default routes;

@@ -83,10 +83,10 @@ export default {
   // },
 
   async delete(req:Request, res:Response) {
-    const _id = req.query["id"];
+    const id = req.query["id"];
 
     try {
-      await User.deleteMany({ _id: _id });
+      await User.deleteMany({ _id: id });
 
       const users = await User.find();
 

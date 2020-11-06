@@ -59,6 +59,11 @@ export default {
     }
   },
   async show(req:Request, res:Response) {
+
+    const postAll = await Post.find()
+    .populate("category")
+    .populate("author")
+
     const headline = await Post.findOne({visibility: "headline"})
         .populate("category")
         .populate("author")
@@ -89,6 +94,7 @@ export default {
           featured: featured,
           special: special,
           several: several,
+          postAll: postAll,
         });
   },
 

@@ -24,7 +24,7 @@ export default {
 
       const id = user[0].id;
       const token = jwt.sign({ id }, confEnv.SECRET_APP, {
-        expiresIn: "1d", // expires in 5min
+        expiresIn: "30d", // expires in 5min
       });
 
       return res.json({ error: false, user_id: id, auth: true, token: token });
